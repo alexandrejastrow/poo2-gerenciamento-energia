@@ -5,6 +5,7 @@
  */
 package db;
 
+import Models.Local;
 import Models.User;
 import Models.Users.Usuario;
 import java.io.BufferedReader;
@@ -23,7 +24,8 @@ import java.util.logging.Logger;
  */
 public class ReadWriteCSV {
     
-    private String header;
+    private String headerUser;
+    private String headerLocal;
     ReadWriteCSV() {
         
     }
@@ -41,7 +43,7 @@ public class ReadWriteCSV {
             try (FileReader in = new FileReader(inputFile); BufferedReader arq = new BufferedReader(in)) {
                 
                 String line = arq.readLine();
-                this.header = line;
+                this.headerUser = line;
                 
                 while ((line = arq.readLine()) != null) {
                     
@@ -66,6 +68,49 @@ public class ReadWriteCSV {
         }
     }
     
+    LinkedList<Local> getLocals(){
+        
+        try {
+            Local loc;
+            
+            LinkedList<Local> locals = new  LinkedList<>();
+            
+            String current = new java.io.File( "." ).getCanonicalPath();
+            File inputFile = new File(current + "\\src\\main\\java\\db\\Files\\locals.csv");
+            
+            try (FileReader in = new FileReader(inputFile); BufferedReader arq = new BufferedReader(in)) {
+                
+                String line = arq.readLine();
+                this.headerLocal = line;
+                
+                while ((line = arq.readLine()) != null) {
+                    
+                    String[] vars = line.split(";");
+                    
+                    loc = new Local(vars[1]);
+                    
+                    locals.add(loc);                  
+                    
+                }
+                
+            } catch (Exception ex) {
+                Logger.getLogger(ReadWriteCSV.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(!locals.isEmpty()){
+                return null;
+            }else{
+                return locals;
+            }
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ReadWriteCSV.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
+    
     public boolean saveUsers(LinkedList<User> users){
         
         try {
@@ -75,7 +120,7 @@ public class ReadWriteCSV {
             try (FileWriter arq = new FileWriter(outputFile)) {
                 PrintWriter gravaArq = new PrintWriter(arq);
                 
-                gravaArq.println(this.header);
+                gravaArq.println(this.headerUser);
                 
                 int id;
                 String tpUser;

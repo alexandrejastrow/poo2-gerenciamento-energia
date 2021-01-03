@@ -5,6 +5,7 @@
  */
 package db;
 
+import Models.Local;
 import Models.User;
 import java.util.LinkedList;
 
@@ -16,7 +17,7 @@ public class Db {
     
     private final ReadWriteCSV file;
     private LinkedList<User> users;
-    //private LinkedList<Local> locals;
+    private LinkedList<Local> locals;
     //private LinkedList<Equipament> equipaments;
     //private LinkedList<Sensor> sensors;
     
@@ -55,4 +56,9 @@ public class Db {
         return null;
     }
 
+        public void loadLocals(){
+    
+            this.locals = file.getLocals();
+
+        }
 }
