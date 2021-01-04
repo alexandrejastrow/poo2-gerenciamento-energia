@@ -1,8 +1,11 @@
 package main;
 
 import Controllers.HashPassWd;
+import Models.Local;
 import Models.User;
 import db.Db;
+import db.DbLocal;
+import db.DbUser;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +17,7 @@ import db.Db;
  *
  * @author alexandre jastrow da cruz
  */
-public class Controladora {
+public class Controladora implements DbUser, DbLocal{
     
     private Db database;
     private User user;
@@ -27,6 +30,8 @@ public class Controladora {
     private void initDb(){
         this.database = new Db();
         database.loadUsers();
+        database.loadLocals();
+        initConfig();
     }
     
     private void initConfig(){
@@ -50,4 +55,42 @@ public class Controladora {
         }
         return false;
     }
+    
+    public boolean userPrivileges(){
+        
+        return user.getForcaDePermissao() == 1;
+    }
+    
+    @Override
+    public User selectUser(String login){
+        return this.database.selectUser(login);
+    }
+
+    @Override
+    public boolean insertUser(User user) {
+        return this.database.insertUser(user);
+    }
+
+    @Override
+    public boolean deleteUser(String nome) {
+        return this.database.deleteUser(nome);
+    }
+
+    @Override
+    public Local selectLocal(int id) {
+        return this.database.selectLocal(id);
+    }
+
+    @Override
+    public boolean insertLocal(Local local) {
+        return this.database.insertLocal(local);
+    }
+
+    @Override
+    public boolean deleteLocal(int id) {
+        return this.database.deleteLocal(id);
+    }
+    
+    
+    
 }
