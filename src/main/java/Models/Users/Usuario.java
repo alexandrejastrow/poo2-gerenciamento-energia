@@ -5,7 +5,6 @@
  */
 package Models.Users;
 
-import Controllers.HashPassWd;
 import Models.User;
 
 /**
@@ -50,12 +49,12 @@ public class Usuario implements User{
     }
     
     
-    public static User newUser(String tpUser, String login, String senha, int permissao) throws Exception {
+    public static User newUser(String tpUser, String login, String senha){
         
         User u;
 
         if(tpUser.equalsIgnoreCase("admin") || tpUser.equalsIgnoreCase("administrador")){
-            u = new Administrador(login, senha, permissao);
+            u = new Administrador(login, senha, 1);
         }else{
             u = new Cliente(login, senha);
         }
