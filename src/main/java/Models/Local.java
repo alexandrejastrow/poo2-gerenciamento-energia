@@ -13,12 +13,32 @@ public class Local {
     
     private static int id;
     private int myId;
+    private String categoria;
     private String nome;
-
-    public Local(String nome) {
+    private int numero;
+    
+    public Local(String categoria, String nome, int numero) {
         this.nome = nome;
+        this.categoria = categoria;
+        this.numero = numero;
         Local.id++;
         this.myId = id;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getMyId() {
