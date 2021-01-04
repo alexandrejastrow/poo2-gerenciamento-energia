@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  * @author alexandre jastrow da cruz
  */
-public class Db {
+public class Db implements DbUser, DbLocal{
     
     private final ReadWriteCSV file;
     private LinkedList<User> users;
@@ -35,7 +35,13 @@ public class Db {
         return file.saveUsers(users);
     }
     
-    public boolean insert(User user){
+    public boolean saveLocals(){
+        
+        return file.saveLocals(locals);
+    }
+    
+    @Override
+    public boolean insertUser(User user){
         
         if(users.add(user)){
             saveUsers();
@@ -44,6 +50,7 @@ public class Db {
             return false;
         } 
     }
+    @Override
     public User selectUser(String login){
         
         for(int i =0; i< users.size(); i++){
@@ -56,9 +63,56 @@ public class Db {
         return null;
     }
 
-        public void loadLocals(){
+    public void loadLocals(){
     
-            this.locals = file.getLocals();
+        this.locals = file.getLocals();
 
+    }
+
+    @Override
+    public boolean deleteUser(String nome) {
+        
+        for(int i = 0; i< users.size(); i++){
+            if(users.get(i).getLogin().equals(nome)){
+                users.remove(i);
+                return true;
+            }
         }
+        return false;
+    }
+
+    @Override
+    public Local selectLocal(int id) {
+        
+        for(int i =0; i< locals.size(); i++){
+            
+            if(locals.get(i).getMyId() == id){
+                return locals.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean insertLocal(Local local) {
+        
+        if(locals.add(local)){
+            saveLocals();
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    @Override
+    public boolean deleteLocal(int id) {
+        
+        for(int i = 0; i< locals.size(); i++){
+            if(locals.get(i).getMyId() == id){
+                locals.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
 }

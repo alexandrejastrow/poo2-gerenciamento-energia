@@ -49,7 +49,7 @@ public class ReadWriteCSV {
                     
                     String[] vars = line.split(";");
                     
-                    us = Usuario.newUser(vars[1], vars[2], vars[3], Integer.valueOf(vars[4]));
+                    us = Usuario.newUser(vars[1], vars[2], vars[3]);
                     
                     clientes.add(us);                  
                     
@@ -87,7 +87,7 @@ public class ReadWriteCSV {
                     
                     String[] vars = line.split(";");
                     
-                    loc = new Local(vars[1]);
+                    loc = new Local(vars[1], vars[2], Integer.parseInt(vars[3]));
                     
                     locals.add(loc);                  
                     
@@ -139,12 +139,51 @@ public class ReadWriteCSV {
                     String aux = id + ";" + tpUser + ";" + login + ";" + senha + ";" + permissao;
                     gravaArq.println(aux);
                 }
+                gravaArq.close();
             }
+            
             
             return true;
         } catch (IOException ex) {
             Logger.getLogger(ReadWriteCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    boolean saveLocals(LinkedList<Local> locals) {
+        
+        try {
+            String current = new java.io.File( "." ).getCanonicalPath();
+            File outputFile = new File(current + "\\src\\main\\java\\db\\Files\\locals.csv");
+            
+            FileWriter arq = new FileWriter(outputFile);
+            PrintWriter gravaArq = new PrintWriter(arq);
+            
+            gravaArq.println(this.headerLocal);
+            
+            int id;
+            String categoria;
+            String nome;
+            int numero;
+            for(Local l : locals){
+                
+                id = l.getMyId();
+                categoria = l.getCategoria();
+                nome = l.getNome();
+                numero = l.getNumero();
+                String aux = id + ";" + categoria + ";" + nome + ";" + numero;
+                gravaArq.println(aux);
+                
+            }
+            gravaArq.close();
+            return true;
+        } catch (IOException ex) {
+            Logger.getLogger(ReadWriteCSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return false;
+    
+    
     }
 }
