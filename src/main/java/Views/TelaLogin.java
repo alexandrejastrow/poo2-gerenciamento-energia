@@ -72,6 +72,11 @@ public class TelaLogin extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -185,11 +190,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void loginButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonEntrarActionPerformed
         
-        String login = textFildLogin.getText();
-        String senha = passwdField.getText();
+        //String login = textFildLogin.getText();
+        //String senha = passwdField.getText();
         
+        String login = "admin";
+        String senha = "1234";
         if(contr.confirmUser(login, senha)){
-            TelaInicial janela = new TelaInicial();
+            TelaInicial janela = new TelaInicial(contr);
             janela.setVisible(true);
             this.dispose();
         }else{
@@ -209,6 +216,10 @@ public class TelaLogin extends javax.swing.JFrame {
     private void passwdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwdFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwdFieldActionPerformed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyPressed
 
     /**
      * @param args the command line arguments
