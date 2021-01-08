@@ -15,11 +15,11 @@ public class Administrador extends Usuario{
     
     public Administrador(String login, String senha, int permissao) {
         Usuario.id++;
-        this.senha = senha;
-        this.login = login;
-        this.setUserID();
+        super.senha = senha;
+        super.login = login;
+        super.setUserID();
         this.permissao = permissao;
-        this.TipoUsuario = "Administrador";
+        super.TipoUsuario = "Administrador";
     }
     
     @Override

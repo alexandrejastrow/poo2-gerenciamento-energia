@@ -13,10 +13,10 @@ public class Cliente extends Usuario{
 
     public Cliente(String login, String senha) {
         Usuario.id++;
-        this.senha = senha;
-        this.login = login;
-        this.setUserID();
-        this.TipoUsuario = "Cliente";
+        super.senha = senha;
+        super.login = login;
+        super.setUserID();
+        super.TipoUsuario = "Cliente";
     }
-    
+
 }

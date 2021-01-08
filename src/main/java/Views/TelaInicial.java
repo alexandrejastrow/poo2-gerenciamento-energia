@@ -29,6 +29,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }
     
     private void initialize(){
+        
+
         try{
             String current = new java.io.File( "." ).getCanonicalPath();
             this.path = current + "\\src\\main\\java\\Images\\";
@@ -40,6 +42,11 @@ public class TelaInicial extends javax.swing.JFrame {
         this.setIconImage(img.getImage());
         
         initComponents();
+        
+        if(contr.userPrivileges() == 0){
+            
+            jMenuCadastroUsuario.setVisible(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,6 +96,11 @@ public class TelaInicial extends javax.swing.JFrame {
         MenuBarCadastro.add(jMenuCadastroSensor);
 
         jMenuCadastroEquipamento.setText("Equipamento");
+        jMenuCadastroEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastroEquipamentoActionPerformed(evt);
+            }
+        });
         MenuBarCadastro.add(jMenuCadastroEquipamento);
 
         jMenuBar1.add(MenuBarCadastro);
@@ -180,6 +192,11 @@ public class TelaInicial extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuCadastroEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroEquipamentoActionPerformed
+        CadastroEquipamento novo = new CadastroEquipamento(this.contr);
+        novo.setVisible(true);
+    }//GEN-LAST:event_jMenuCadastroEquipamentoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Models.Locals;
+
+import Models.Place;
 
 /**
  *
  * @author alexandre jastrow da cruz
  */
-public class Local {
+public class Local implements Place{
     
     private static int id;
     private int myId;

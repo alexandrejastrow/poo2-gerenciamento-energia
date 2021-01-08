@@ -5,7 +5,7 @@
  */
 package db;
 
-import Models.Local;
+import Models.Locals.Local;
 import Models.User;
 import Models.Users.Usuario;
 import java.io.BufferedReader;
@@ -47,10 +47,10 @@ public class ReadWriteCSV {
                 
                 while ((line = arq.readLine()) != null) {
                     
+                    if("".equals(line)) break;
+                    
                     String[] vars = line.split(";");
-                    
                     us = Usuario.newUser(vars[1], vars[2], vars[3]);
-                    
                     clientes.add(us);                  
                     
                 }
@@ -84,6 +84,8 @@ public class ReadWriteCSV {
                 this.headerLocal = line;
                 
                 while ((line = arq.readLine()) != null) {
+
+                    if("".equals(line)) break;
                     
                     String[] vars = line.split(";");
                     
@@ -96,12 +98,8 @@ public class ReadWriteCSV {
             } catch (Exception ex) {
                 Logger.getLogger(ReadWriteCSV.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            if(!locals.isEmpty()){
-                return null;
-            }else{
-                return locals;
-            }
+
+            return locals;
             
             
         } catch (IOException ex) {

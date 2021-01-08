@@ -5,7 +5,7 @@
  */
 package Views;
 
-import Models.Local;
+import Models.Locals.Local;
 import javax.swing.JOptionPane;
 import main.Controladora;
 

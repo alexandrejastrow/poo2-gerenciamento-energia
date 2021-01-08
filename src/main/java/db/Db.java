@@ -5,7 +5,7 @@
  */
 package db;
 
-import Models.Local;
+import Models.Locals.Local;
 import Models.User;
 import java.util.LinkedList;
 
@@ -64,9 +64,7 @@ public class Db implements DbUser, DbLocal{
     }
 
     public void loadLocals(){
-    
         this.locals = file.getLocals();
-
     }
 
     @Override
@@ -114,5 +112,19 @@ public class Db implements DbUser, DbLocal{
             }
         }
         return false;
+    }
+    
+    public String[] getLocals(){
+        
+        int qtd = locals.size();
+
+        String names[] = new String[qtd];
+        System.out.println(names);
+        for(int i = 0; i< qtd; i++){
+            names[i] = Integer.toString(locals.get(i).getNumero()) + " " + 
+                                        locals.get(i).getNome();
+        }
+                System.out.println(names);
+        return names;
     }
 }

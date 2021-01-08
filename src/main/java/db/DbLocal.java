@@ -5,7 +5,7 @@
  */
 package db;
 
-import Models.Local;
+import Models.Locals.Local;
 
 /**
  *

@@ -1,11 +1,13 @@
 package main;
 
 import Controllers.HashPassWd;
-import Models.Local;
+import Models.Device;
+import Models.Locals.Local;
 import Models.User;
 import db.Db;
 import db.DbLocal;
 import db.DbUser;
+import java.util.LinkedList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,12 +31,12 @@ public class Controladora implements DbUser, DbLocal{
     
     private void initDb(){
         this.database = new Db();
-        database.loadUsers();
-        database.loadLocals();
         initConfig();
     }
     
     private void initConfig(){
+        database.loadUsers();
+        database.loadLocals();
     }
     
     public boolean confirmUser(String name, String senha){
@@ -56,9 +58,8 @@ public class Controladora implements DbUser, DbLocal{
         return false;
     }
     
-    public boolean userPrivileges(){
-        
-        return user.getForcaDePermissao() == 1;
+    public int userPrivileges(){
+        return user.getForcaDePermissao();
     }
     
     @Override
@@ -92,5 +93,12 @@ public class Controladora implements DbUser, DbLocal{
     }
     
     
+    public String[] getDevices(){
+        return new String[] { "ArCondicionado", "Lampada"};
+    }
     
+    public String[] getLocals(){
+        
+        return database.getLocals();
+    }
 }
