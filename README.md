@@ -4,7 +4,7 @@
 #### Prof Felipe Frechiani de Oliveira </br> </br>
 
 #### Usuarios de teste </br>
-#### login: admin
-#### senha: 1234
-#### login: teste
-#### senha: 123456
+login: admin
+senha: 1234
+login: teste
+senha: 123456
