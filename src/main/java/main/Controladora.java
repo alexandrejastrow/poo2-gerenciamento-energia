@@ -8,6 +8,8 @@ import db.Db;
 import db.DbLocal;
 import db.DbUser;
 import java.util.LinkedList;
+import Views.TelaLogin;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,12 +25,12 @@ public class Controladora implements DbUser, DbLocal{
     
     private Db database;
     private User user;
-    
+
     public Controladora() {
         initDb();
         initConfig();
     }
-    
+
     private void initDb(){
         this.database = new Db();
         initConfig();
@@ -100,5 +102,16 @@ public class Controladora implements DbUser, DbLocal{
     public String[] getLocals(){
         
         return database.getLocals();
+    }
+    
+    public static void main(String[] args){
+        
+        Controladora contr = new Controladora();
+       
+        TelaLogin novaTelaLogin = new TelaLogin(contr);
+        
+        novaTelaLogin.setVisible(true);
+        
+        
     }
 }

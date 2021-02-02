@@ -27,38 +27,4 @@ public class ArCondicionado extends Equipamento{
         super.name = "Ar Condicionado";
         super.state = false;
     }
-
-    
-    public int getMinValueOff() {
-        return minValueOff;
-    }
-
-    public void setMinValueOff(int minValueOff) {
-        this.minValueOff = minValueOff;
-    }
-
-    public int getMaxValueOff() {
-        return maxValueOff;
-    }
-
-    public void setMaxValueOff(int maxValueOff) {
-        this.maxValueOff = maxValueOff;
-    }
-
-    public int getMinValueOn() {
-        return minValueOn;
-    }
-
-    public void setMinValueOn(int minValueOn) {
-        this.minValueOn = minValueOn;
-    }
-
-    public int getMaxValueOn() {
-        return maxValueOn;
-    }
-
-    public void setMaxValueOn(int maxValueOn) {
-        this.maxValueOn = maxValueOn;
-    }
-
 }

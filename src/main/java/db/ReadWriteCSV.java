@@ -30,7 +30,7 @@ public class ReadWriteCSV {
         
     }
     
-    LinkedList<User> getUsers(){
+    public LinkedList<User> getUsers(){
         
         try {
             User us;
@@ -68,7 +68,7 @@ public class ReadWriteCSV {
         }
     }
     
-    LinkedList<Local> getLocals(){
+    public LinkedList<Local> getLocals(){
         
         try {
             Local loc;

@@ -19,10 +19,14 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin() {
-        contr = new Controladora();
+    public TelaLogin(Controladora contr) {
+        this.contr = contr;
         initComponents();
         
+    }
+
+    private TelaLogin() {
+        initComponents();
     }
 
     /**
@@ -190,11 +194,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void loginButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonEntrarActionPerformed
         
-        //String login = textFildLogin.getText();
-        //String senha = passwdField.getText();
+        String login = textFildLogin.getText();
+        String senha = passwdField.getText();
         
-        String login = "admin";
-        String senha = "1234";
         if(contr.confirmUser(login, senha)){
             TelaInicial janela = new TelaInicial(contr);
             janela.setVisible(true);

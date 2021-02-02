@@ -12,7 +12,10 @@ package Models.Devices;
  */
 public class Lampada extends Equipamento{
 
-    private int lumen;
+    private int minValueOff;
+    private int maxValueOff;
+    private int minValueOn;
+    private int maxValueOn;
 
     public Lampada(String nome, int place) {
         
@@ -26,13 +29,5 @@ public class Lampada extends Equipamento{
     
     
     
-
-    public int getLumen() {
-        return lumen;
-    }
-
-    public void setLumen(int lumen) {
-        this.lumen = lumen;
-    }
-
+    
 }
