@@ -5,7 +5,7 @@
  */
 package Views;
 
-import main.Controladora;
+import Controllers.Controladora;
 
 /**
  *

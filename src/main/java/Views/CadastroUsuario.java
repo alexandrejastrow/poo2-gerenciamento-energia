@@ -12,7 +12,9 @@ import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import main.Controladora;
+import Controllers.Controladora;
+import Controllers.passwordDifficulty;
+import Controllers.passwordGenerator;
 
 /**
  *
@@ -113,26 +115,26 @@ public class CadastroUsuario extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCadastroUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCadastroUsuarioSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCadastroUsuarioSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCadastroUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonCadastraUsuarioCancel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCadastraUsuario)
-                .addGap(23, 23, 23))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(27, 27, 27)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPasswordFieldCadastroSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                        .addComponent(jPasswordFieldCadastroSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextFieldCadastroUsuarioLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                         .addComponent(jComboBoxTpUser, 0, 166, Short.MAX_VALUE))
                     .addContainerGap(22, Short.MAX_VALUE)))
@@ -147,7 +149,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addComponent(jLabelCadastroUsuarioLogin)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelCadastroUsuarioSenha)
-                        .addContainerGap(67, Short.MAX_VALUE))
+                        .addContainerGap(66, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,7 +166,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jTextFieldCadastroUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jPasswordFieldCadastroSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(71, Short.MAX_VALUE)))
+                    .addContainerGap(128, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,56 +177,64 @@ public class CadastroUsuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(333, 238));
+        setSize(new java.awt.Dimension(333, 237));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraUsuarioActionPerformed
-        
-        User n;
-        String tpUser = (String) jComboBoxTpUser.getSelectedItem();
-        
-        String login = jTextFieldCadastroUsuarioLogin.getText();
-        
-        String passw = jPasswordFieldCadastroSenha.getText();
-        
-        if(contr.selectUser(login) != null){
-            JOptionPane.showMessageDialog(null, "Usuarios Já Cadastrado!!!");
-            return;
-        }
-        
-        int tp;
-               
-        try {
-            String senhaHashada = HashPassWd.gerarHash(passw);
-            
-            n = Usuario.newUser(tpUser, login, senhaHashada);
-            
-            this.contr.insertUser(n);
-            JOptionPane.showMessageDialog(null, "Usuarios "+ login + " Cadastrado com Sucesso!!!");
-            
-        } catch (HeadlessException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        dispose();
-        
-    }//GEN-LAST:event_jButtonCadastraUsuarioActionPerformed
-
-    private void jButtonCadastraUsuarioCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraUsuarioCancelActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButtonCadastraUsuarioCancelActionPerformed
+    private void jPasswordFieldCadastroSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldCadastroSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldCadastroSenhaActionPerformed
 
     private void jComboBoxTpUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTpUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTpUserActionPerformed
 
-    private void jPasswordFieldCadastroSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldCadastroSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldCadastroSenhaActionPerformed
+    private void jButtonCadastraUsuarioCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraUsuarioCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonCadastraUsuarioCancelActionPerformed
+
+    private void jButtonCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraUsuarioActionPerformed
+
+        User n;
+        String tpUser = (String) jComboBoxTpUser.getSelectedItem();
+
+        String login = jTextFieldCadastroUsuarioLogin.getText();
+
+        String passw = jPasswordFieldCadastroSenha.getText();
+
+        if(contr.selectUser(login) != null){
+            JOptionPane.showMessageDialog(null, "Usuarios Já Cadastrado!!!");
+            return;
+        }
+        if(login.equals("") || passw.equals("")){
+            JOptionPane.showMessageDialog(null, "Senha ou login invalido!!!");
+            return;
+        }
+
+        if(passwordDifficulty.isStrong(passw) == false){
+            JOptionPane.showMessageDialog(null, "Senha muito fraca!!!");
+            return;
+        }
+        int tp;
+
+        try {
+            String senhaHashada = HashPassWd.gerarHash(passw);
+
+            n = Usuario.newUser(tpUser, login, senhaHashada);
+
+            this.contr.insertUser(n);
+            JOptionPane.showMessageDialog(null, "Usuarios "+ login + " Cadastrado com Sucesso!!!");
+
+        } catch (HeadlessException ex) {
+            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        dispose();
+
+    }//GEN-LAST:event_jButtonCadastraUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,7 +7,7 @@ package Views;
 
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import main.Controladora;
+import Controllers.Controladora;
 
 /**
  *
@@ -18,12 +18,11 @@ public class TelaInicial extends javax.swing.JFrame {
     private String path;
     private Controladora contr;
 
-    public TelaInicial(Controladora contr) {
-        
-        this.contr = contr;
-        initialize();
-    }
     public TelaInicial() {
+        this.contr = Controladora.getInstance();
+        if(!contr.userOn()){
+            System.exit(0);
+        }
         initialize();
         
     }

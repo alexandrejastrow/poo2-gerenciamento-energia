@@ -7,7 +7,7 @@ package Views;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import main.Controladora;
+import Controllers.Controladora;
 
 /**
  *
@@ -16,16 +16,10 @@ import main.Controladora;
 public class TelaLogin extends javax.swing.JFrame {
     
     Controladora contr;
-    /**
-     * Creates new form TelaLogin
-     */
-    public TelaLogin(Controladora contr) {
-        this.contr = contr;
-        initComponents();
-        
-    }
 
     private TelaLogin() {
+        
+        this.contr = Controladora.getInstance();
         initComponents();
     }
 
@@ -198,7 +192,7 @@ public class TelaLogin extends javax.swing.JFrame {
         String senha = passwdField.getText();
         
         if(contr.confirmUser(login, senha)){
-            TelaInicial janela = new TelaInicial(contr);
+            TelaInicial janela = new TelaInicial();
             janela.setVisible(true);
             this.dispose();
         }else{
@@ -249,7 +243,7 @@ public class TelaLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+ 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
